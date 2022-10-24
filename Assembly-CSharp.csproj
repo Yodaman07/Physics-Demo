@@ -41,8 +41,10 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets/Slingshot.cs" />
-     <Compile Include="Assets/SpawnCircle.cs" />
+     <Compile Include="Assets/Scripts/Tests/GenRopeAngle.cs" />
+     <Compile Include="Assets/Scripts/Swing.cs" />
+     <Compile Include="Assets/Scripts/Slingshot.cs" />
+     <Compile Include="Assets/Scripts/SpawnCircle.cs" />
      <Reference Include="UnityEngine">
      <HintPath>/Applications/Unity/Hub/Editor/2021.3.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
      </Reference>
