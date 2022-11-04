@@ -41,6 +41,9 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets/Scripts/PortalTrigger.cs" />
+     <Compile Include="Assets/Scripts/GetDirection.cs" />
+     <Compile Include="Assets/Scripts/AntiGravity.cs" />
      <Compile Include="Assets/Scripts/Tests/GenRopeAngle.cs" />
      <Compile Include="Assets/Scripts/Swing.cs" />
      <Compile Include="Assets/Scripts/Slingshot.cs" />
@@ -675,15 +678,6 @@
      <Reference Include="mscorlib">
      <HintPath>/Applications/Unity/Hub/Editor/2021.3.11f1/Unity.app/Contents/NetStandard/compat/2.1.0/shims/netfx/mscorlib.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.VisualScripting.Flow.Editor">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.VisualScripting.Flow.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Tilemap.Extras">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Animation.Editor">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.InternalAPIEngineBridge.001">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
      </Reference>
@@ -693,14 +687,62 @@
      <Reference Include="Unity.2D.PixelPerfect">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.2D.Tilemap.Editor">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="PsdPlugin">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
      </Reference>
      <Reference Include="Unity.TextMeshPro.Editor">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.State.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.VisualScripting.State.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Searcher.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.Searcher.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.IK.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Path.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEditor.UI">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Rider.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEngine.UI">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.IK.Runtime">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ShaderGraph.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Mathematics.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Common.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Flow.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.VisualScripting.Flow.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Tilemap.Extras">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Animation.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Tilemap.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualStudio.Editor">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
@@ -714,47 +756,29 @@
      <Reference Include="Unity.TextMeshPro">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.VisualScripting.State.Editor">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.VisualScripting.State.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.Burst.Editor">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.IK.Editor">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.2D.Sprite.Editor">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.2D.Path.Editor">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
+     <Reference Include="Unity.2D.Psdimporter.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+     <Reference Include="Unity.InternalAPIEditorBridge.001">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Core.Runtime">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Flow">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
      </Reference>
-     <Reference Include="UnityEditor.UI">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.PlasticSCM.Editor">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Rider.Editor">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Psdimporter.Editor">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="UnityEngine.UI">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.2D.Tilemap.Extras.Editor">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.InternalAPIEditorBridge.001">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Services.Core">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.Services.Core.dll</HintPath>
@@ -764,9 +788,6 @@
      </Reference>
      <Reference Include="Unity.Mathematics">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.IK.Runtime">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Services.Core.Analytics">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.Services.Core.Analytics.dll</HintPath>
@@ -789,8 +810,8 @@
      <Reference Include="Unity.Timeline.Editor">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Mathematics.Editor">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
      </Reference>
      <Reference Include="Unity.2D.Common.Runtime">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
@@ -798,8 +819,8 @@
      <Reference Include="Unity.2D.SpriteShape.Editor">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.2D.Common.Editor">
-     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
+     <Reference Include="Unity.RenderPipelines.Core.Editor">
+     <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.2D.SpriteShape.Runtime">
      <HintPath>/Users/ayaan/Desktop/Unity/Physics Demo/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>

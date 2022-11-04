@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Swing_Hitbox
+  - Portal-In
+  - Portal-Out
+  - Ground
   layers:
   - Default
   - TransparentFX

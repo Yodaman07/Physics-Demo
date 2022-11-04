@@ -14,7 +14,7 @@ public class Swing : MonoBehaviour
     
     private void Start()
     {
-        _player = GameObject.Find("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
         _swing = GameObject.Find("Swing");
     }
 
@@ -37,7 +37,6 @@ public class Swing : MonoBehaviour
             
             // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             SetDistancePhysics();
-
 
             if (RopeCut())
             {
@@ -62,36 +61,28 @@ public class Swing : MonoBehaviour
     void SpawnRope()
     {
         _rope = new GameObject();
-        _rope.AddComponent<BoxCollider2D>();
+        _rope.AddComponent<BoxCollider2D>().isTrigger = true; //Removes collision from it
         _rope.AddComponent<SpriteRenderer>().sprite = ropeSprite;
         _rope.transform.localScale = new Vector3(0.05f, 4, 1);
         _ropeSpawned = true;
 
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     void SetDistancePhysics()
     {
-        // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-        Vector2 beforeVelocity = _player.GetComponent<Rigidbody2D>().GetPointVelocity(_player.transform.position);
-        
-        // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-        // ReSharper disable once Unity.PerformanceCriticalCodeNullComparison
         if (_player.GetComponent<DistanceJoint2D>() == null)
         {
-            // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-            _player.AddComponent<DistanceJoint2D>();    
+            Vector2 beforeVelocity = _player.GetComponent<Rigidbody2D>().GetPointVelocity(_player.transform.position);
+            _player.AddComponent<DistanceJoint2D>();
+            DistanceJoint2D dj = _player.GetComponent<DistanceJoint2D>();
+        
+            dj.connectedAnchor = _swing.transform.position - new Vector3(0,2,0);
+            dj.autoConfigureDistance = true;
+            dj.attachedRigidbody.velocity = beforeVelocity;
+            dj.enableCollision = true;
         }
-        
-        // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-        DistanceJoint2D dj = _player.GetComponent<DistanceJoint2D>();
-        
-        dj.connectedAnchor = _swing.transform.position - new Vector3(0,2,0);
-        dj.autoConfigureDistance = true;
-        // dj.enableCollision = true;
-        
-        dj.attachedRigidbody.velocity = beforeVelocity;
-        //TODO: Add multiplier
-        
+        //TODO: Add multiplier?
     }
 
     bool RopeCut()
@@ -106,7 +97,13 @@ public class Swing : MonoBehaviour
                 return true;
             }
         }
+        
+        if (Input.GetKey(KeyCode.C))
+        {
+            return true;
+        }
+
         return false;
-    }
+}
 
 }

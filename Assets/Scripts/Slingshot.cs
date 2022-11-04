@@ -11,7 +11,6 @@ public class Slingshot : MonoBehaviour
     public Sprite pathSprite;
     public float velocityFactor = 10.0f;
 
-
     private Rigidbody2D _rb;
     private GameObject _path;
     private IEnumerator _calcPath;
@@ -27,11 +26,13 @@ public class Slingshot : MonoBehaviour
 
     void Update()
     {
+        // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
         if (Input.GetMouseButtonDown(0) && CheckTouch())
         {
             StartCoroutine(_calcPath);
         }
 
+        // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
         if (Input.GetMouseButtonUp(0) && _pathReady)
         {
             _pathReady = false;
@@ -50,22 +51,22 @@ public class Slingshot : MonoBehaviour
         {
             Destroy(_path);
         }
+
+        Vector3 ballPos = transform.position;
+        Vector2 diff = ballPos-mouseBallPos;
         _path = new GameObject();
         // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
         _path.AddComponent<SpriteRenderer>().sprite = pathSprite;
-        _path.transform.localScale = new Vector3(0.2f,pathLength,1);
+        _path.transform.localScale = new Vector3(2f,pathLength,1);
         _path.transform.SetParent(transform);
+        _path.transform.localPosition = new Vector3(0, 0, 0);
+        //TODO: Add state anims
         
-        _path.transform.localPosition = new Vector3(0, -(pathLength/2), 0);
-        //-(pathLength/2) sets the height to be half of the the height below (sets it directly under the ball)
-
-        Vector3 ballPos = transform.position;
+        //-(pathLength/2) sets the height to be half of the the height below (sets it directly under the ball) (used before custom sprites w pivot points)
         
-        Vector2 diff = ballPos-mouseBallPos;
         float angle = Mathf.Atan2(diff.y,diff.x); //Change in y/x with inverse tangent
         float degrees = angle * Mathf.Rad2Deg+90;
         //https://forum.unity.com/threads/why-am-i-getting-the-wrong-angles-with-vector2-angle.209262/ Code from there. A big help for the angles
-
         _path.transform.RotateAround(ballPos, new Vector3(0,0,1), degrees);
     }
 
@@ -98,7 +99,18 @@ public class Slingshot : MonoBehaviour
                 return true;
             }    
         }
-
         return false;
     }
+
+    // bool CheckInAir()
+    // {
+    //     ContactFilter2D contactFilter2D = new ContactFilter2D();
+    //     // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
+    //     int collisionCount = GetComponent<CircleCollider2D>().OverlapCollider(contactFilter2D, new Collider2D[1]);
+    //     if (collisionCount >= 1)
+    //     {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 }
