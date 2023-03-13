@@ -21,8 +21,11 @@ public class PortalTrigger : MonoBehaviour
         bool correctDirection = GetDirection.CheckHitDirection(col.transform.position - transform.position, enterDirection);
         if (col.CompareTag("Player") && correctDirection)
         {
-            _player.transform.position = _portalOut.position;
-
+            //20 pixels is one unit
+            //pixel count/20
+            _player.transform.position = _portalOut.position + GetDirection.GetOutDirection(exitDirection);
+            // Debug.Break();
+            
             Rigidbody2D rb = _player.GetComponent<Rigidbody2D>();
             rb.velocity = GetDirection.GetCorrectVelocity(exitDirection, enterDirection, rb.velocity);
         }

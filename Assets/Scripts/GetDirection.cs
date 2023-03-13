@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static UnityEngine.Vector3;
@@ -35,7 +36,21 @@ public class GetDirection : MonoBehaviour
             {
                 //X and Y are either 1 or -1
                 //True using fix
-                return true;
+                Dictionary<float, Directions> distances = new Dictionary<float,Directions>();
+                for (int i = 0; i < 4; i++) //Loop to grab all distances
+                {
+                    KeyValuePair<Directions, Vector3> currentElement = Values.ElementAt(i);
+                    distances.Add(Vector2.Distance(collisionPos, Values.ElementAt(i).Value),currentElement.Key);
+                }
+                
+                float minValue = distances.Keys.Min();
+                // print(distances[minValue]);
+                if (distances[minValue] == enterDirection)
+                {
+                    return true;
+                }
+                
+                return false;
             }
             index++;
         }
@@ -45,45 +60,90 @@ public class GetDirection : MonoBehaviour
 
     public static Vector3 GetCorrectVelocity(Directions exitDirection, Directions enterDirection, Vector3 currentVelocity)
     {
-        Vector3 exitDirectionPos = Values.Values.ElementAt((int)exitDirection);
+        Vector3 directionVelocityCorrected = Values.Values.ElementAt((int)exitDirection);
         for (int i = 0; i <= 2; i++)
         {
-            if (exitDirectionPos[i] == 0.0f)
+            if (directionVelocityCorrected[i] == 0.0f)
             {
-                exitDirectionPos[i] = 1;
+                directionVelocityCorrected[i] = 1;
             }
         } //Corrects the exit pos
         
-        if (exitDirection is Directions.Down or Directions.Up || enterDirection is Directions.Up or Directions.Down)
+        Vector3 newVelocity = CorrectVelocity(Vector3.Scale(currentVelocity, directionVelocityCorrected)/2, enterDirection, exitDirection);
+
+        // print(directionVelocityCorrected);
+        // print(currentVelocity);
+        // print(Vector3.Scale(currentVelocity, directionVelocityCorrected)/2);
+        // print(newVelocity);
+        return newVelocity;
+    }
+
+    private static Vector3 CorrectVelocity(Vector3 scale,Directions enterDirection, Directions exitDirection) //This method corrects the velocities from the Scale above
+    {
+        //right has all positives
+        //left is negatives
+        //up is positive flipped
+        //down is negative flipped
+
+        if (exitDirection is Directions.Down or Directions.Up) //This code flips the directions
         {
-            float currentX = currentVelocity.x;
-            float currentY = currentVelocity.y;
-            currentVelocity.x = currentY;
-            currentVelocity.y = currentX;
-            //Reassigns the exit pos values
+            float currentX = scale.x;
+            float currentY = scale.y;
+            scale.x = currentY;
+            scale.y = currentX;
         }
         
-        if (exitDirection is Directions.Down or Directions.Up && enterDirection is Directions.Up or Directions.Down)
+        if (enterDirection is Directions.Down or Directions.Up)
         {
-            float currentX = currentVelocity.x;
-            float currentY = currentVelocity.y;
-            currentVelocity.x = currentY;
-            currentVelocity.y = currentX;
+            float currentX = scale.x;
+            float currentY = scale.y;
+            scale.x = currentY;
+            scale.y = currentX;
         }
         
-        print(currentVelocity);
-        print(exitDirectionPos);
-        print(Vector3.Scale(currentVelocity, exitDirectionPos));
-        return Vector3.Scale(currentVelocity, exitDirectionPos)/2;
+        if (exitDirection is Directions.Right or Directions.Up) //Up & right is all positive while down and left is all negative.
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                scale[i] = Math.Abs(scale[i]);    
+            }
+        }
+
+        if (exitDirection is Directions.Left or Directions.Down)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                scale[i] = Math.Abs(scale[i]);
+                scale[i] *= -1;
+            }
+        }
+
+        return scale;
+    }
+
+    public static Vector3 GetOutDirection(Directions exitDirection)
+    {
+        Vector3 offset = OutDirection.Values.ElementAt((int)exitDirection);
+        return offset;
     }
     
-    private static readonly Dictionary<string, Vector3> Values = new Dictionary<string, Vector3>()
+    
+    private static readonly Dictionary<Directions, Vector3> Values = new Dictionary<Directions, Vector3>()
     {
-        {"Up", up},
-        {"Down", down},
-        {"Left", left},
-        {"Right", right},
+        {Directions.Up, up},
+        {Directions.Down, down},
+        {Directions.Left, left},
+        {Directions.Right, right},
     };
+
+    private static readonly Dictionary<string, Vector3> OutDirection = new Dictionary<string, Vector3>()
+    {
+        { "Up",  new Vector3(0,1.25f,0)},
+        { "Down", new Vector3(0,-1.25f,0)},
+        { "Left", new Vector3(-1.25f,0,0) },
+        { "Right", new Vector3(1.25f,0,0) },
+    };
+
 }
 
 public enum Directions { 

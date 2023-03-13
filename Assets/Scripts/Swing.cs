@@ -40,12 +40,10 @@ public class Swing : MonoBehaviour
 
             if (RopeCut())
             {
-                
                 Destroy(_rope);
                 // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
                 Destroy(_player.GetComponent<DistanceJoint2D>());
                 _ropeSpawned = false;
-                
             }
         }
     }
@@ -65,7 +63,6 @@ public class Swing : MonoBehaviour
         _rope.AddComponent<SpriteRenderer>().sprite = ropeSprite;
         _rope.transform.localScale = new Vector3(0.05f, 4, 1);
         _ropeSpawned = true;
-
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
